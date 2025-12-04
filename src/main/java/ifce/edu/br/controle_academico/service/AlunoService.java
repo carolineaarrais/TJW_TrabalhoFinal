@@ -26,7 +26,6 @@ public class AlunoService {
 
             if (existente.isPresent()) {
 
-                // Se o registro encontrado é de outro aluno, não permitir
                 if (aluno.getId() == null || !existente.get().getId().equals(aluno.getId())) {
                     throw new DuplicateResourceException(
                             "Matrícula já cadastrada: " + aluno.getMatricula()
