@@ -19,10 +19,22 @@ public class AlunoService {
     public Optional<Aluno> buscarPorId(Long id) { return repo.findById(id); }
 
     public Aluno salvar(Aluno aluno) {
-        if (aluno.getMatricula() != null && repo.existsByMatricula(aluno.getMatricula())) {
-            // if updating existing, allow same matricula for same id; omitted here for brevity
-            throw new DuplicateResourceException("Matrícula já cadastrada: " + aluno.getMatricula());
+
+        if (aluno.getMatricula() != null) {
+
+            Optional<Aluno> existente = repo.findByMatricula(aluno.getMatricula());
+
+            if (existente.isPresent()) {
+
+                // Se o registro encontrado é de outro aluno, não permitir
+                if (aluno.getId() == null || !existente.get().getId().equals(aluno.getId())) {
+                    throw new DuplicateResourceException(
+                            "Matrícula já cadastrada: " + aluno.getMatricula()
+                    );
+                }
+            }
         }
+
         return repo.save(aluno);
     }
 

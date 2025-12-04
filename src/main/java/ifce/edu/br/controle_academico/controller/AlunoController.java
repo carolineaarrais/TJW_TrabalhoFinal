@@ -37,15 +37,31 @@ public class AlunoController {
     }
 
     @PostMapping("/salvar")
-    public String salvar(@ModelAttribute Aluno aluno,
+    public String salvar(@ModelAttribute Aluno alunoForm,
                          Model model,
-                         @AuthenticationPrincipal User user) { // pega usuário logado
+                         @AuthenticationPrincipal User user) {
+
         try {
             Usuario usuarioLogado = usuarioRepository.findByLogin(user.getUsername());
-            aluno.setCreatedBy(usuarioLogado);
+
+            Aluno aluno;
+
+            if (alunoForm.getId() != null) {
+                aluno = service.buscarPorId(alunoForm.getId()).orElseThrow();
+
+                aluno.setNome(alunoForm.getNome());
+                aluno.setMatricula(alunoForm.getMatricula());
+                aluno.setEmail(alunoForm.getEmail());
+                aluno.setStatus(alunoForm.getStatus());
+                aluno.setDataNascimento(alunoForm.getDataNascimento());
+            } else {
+                aluno = alunoForm;
+                aluno.setCreatedBy(usuarioLogado);
+            }
 
             service.salvar(aluno);
             return "redirect:/alunos";
+
         } catch (Exception e) {
             model.addAttribute("erro", e.getMessage());
             model.addAttribute("statusList", StatusAluno.values());

@@ -20,12 +20,36 @@ public class MatriculaService {
     public Optional<Matricula> buscarPorId(Long id) { return repo.findById(id); }
 
     public Matricula salvar(Matricula m) {
-        // valida duplicata: não permitir matrícula CURSANDO duplicada
         if (m.getAluno() != null && m.getDisciplina() != null) {
-            boolean existe = repo.existsByAlunoAndDisciplinaAndSituacao(
+
+            boolean existeCursando = repo.existsByAlunoAndDisciplinaAndSituacao(
                     m.getAluno(), m.getDisciplina(), SituacaoMatricula.CURSANDO);
-            if (existe && (m.getId() == null)) { // se é novo registro
-                throw new MatriculaDuplicadaException("Aluno já matriculado nesta disciplina (CURSANDO).");
+
+            boolean existeAprovado = repo.existsByAlunoAndDisciplinaAndSituacao(
+                    m.getAluno(), m.getDisciplina(), SituacaoMatricula.APROVADO);
+
+            boolean existeTrancado = repo.existsByAlunoAndDisciplinaAndSituacao(
+                    m.getAluno(), m.getDisciplina(), SituacaoMatricula.TRANCADO);
+
+            // Só valida duplicidade para novos registros
+            boolean isNovo = (m.getId() == null);
+
+            if (isNovo && existeCursando) {
+                throw new MatriculaDuplicadaException(
+                        "Aluno já está matriculado nesta disciplina (CURSANDO)."
+                );
+            }
+
+            if (isNovo && existeAprovado) {
+                throw new MatriculaDuplicadaException(
+                        "Aluno já foi aprovado nesta disciplina e não pode cursá-la novamente."
+                );
+            }
+
+            if (isNovo && existeTrancado) {
+                throw new MatriculaDuplicadaException(
+                        "Aluno já está matriculado nesta disciplina (TRANCADO)."
+                );
             }
         }
         return repo.save(m);
