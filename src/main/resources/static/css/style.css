@@ -1,0 +1,50 @@
+/* Custom styles */
+/* ===============================
+         HEADER PERSONALIZADO
+   Verde #365e2f  |  Vermelho #b51d1d
+   =============================== */
+
+/* Fundo do header */
+.custom-header {
+    background-color: #365e2f; /* Verde escuro */
+    padding: 12px;
+}
+
+/* Logo */
+.custom-header .navbar-brand {
+    color: #ffffff !important;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+/* Links do menu */
+.custom-header .nav-link {
+    color: #e8f5e9 !important; /* verde claro quase branco */
+    margin-right: 18px;
+    transition: color 0.2s ease-in-out;
+}
+
+/* Hover dos links */
+.custom-header .nav-link:hover {
+    color: #b51d1d !important; /* Vermelho destaque */
+}
+
+/* Botão sair */
+.custom-header .btn-outline-light {
+    border-color: #ffffff !important;
+    color: #ffffff !important;
+    transition: background-color 0.2s ease-in-out,
+                color 0.2s ease-in-out,
+                border-color 0.2s ease-in-out;
+}
+
+.custom-header .btn-outline-light:hover {
+    background-color: #b51d1d !important; /* Vermelho */
+    border-color: #b51d1d !important;
+    color: #ffffff !important;
+}
+
+/* Ajuste do body */
+body {
+    background-color: #f8f9fa;
+}

@@ -1,0 +1,41 @@
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-dark custom-header mb-4">
+        <div class="container">
+
+            <a class="navbar-brand" href="/">Controle Acadêmico</a>
+
+            <div>
+                <ul class="navbar-nav me-auto">
+
+                    <li class="nav-item"><a class="nav-link" href="/alunos">Alunos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/disciplinas">Disciplinas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/matriculas">Matrículas</a></li>
+
+                    <!-- Criar conta: admin OU secretaria -->
+                    <li class="nav-item"
+                        th:if="${#authorization.expression('isAuthenticated() and (hasRole(''ADMIN'') or hasRole(''SECRETARIA''))')}">
+                        <a class="nav-link" th:href="@{/register}">Criar Usuário</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Botão SAIR -->
+            <div th:if="${#authorization.expression('isAuthenticated()')}">
+                <a class="btn btn-outline-light btn-sm"
+                   href="#"
+                   onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+                    Sair
+                </a>
+                <form id="logoutForm" th:action="@{/logout}" method="post"></form>
+            </div>
+
+            <!-- Botão ENTRAR -->
+            <div th:if="${#authorization.expression('!isAuthenticated()')}">
+                <a class="btn btn-outline-light btn-sm" th:href="@{/login}">
+                    Entrar
+                </a>
+            </div>
+
+        </div>
+    </nav>
+</div>
