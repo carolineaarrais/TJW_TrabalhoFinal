@@ -112,11 +112,11 @@ cd TJW_TrabalhoFinal
 
 ### 2) Configuração da Database
 - Crie o banco **academico**
-- Confirme que o arquivo **`src/main/resources/application.properties`** está assim:
+- Confirme que o arquivo **`src/main/resources/application-prod.properties`** está assim:
 ```
 spring.datasource.url=jdbc:mysql://localhost:3306/controle_academico?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
 spring.datasource.username=root
-spring.datasource.password=root
+spring.datasource.password=>Escreva sua senha aqui<
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
