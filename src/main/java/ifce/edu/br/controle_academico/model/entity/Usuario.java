@@ -19,8 +19,6 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    // audit: createdBy could be null for seed/register; implement later if needed
-
     // getters / setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
