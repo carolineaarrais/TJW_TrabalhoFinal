@@ -37,7 +37,7 @@ public class DisciplinaController {
     @PostMapping("/salvar")
     public String salvar(@ModelAttribute Disciplina disciplina,
                          Model model,
-                         @AuthenticationPrincipal User user){ // pega usuário logado
+                         @AuthenticationPrincipal User user){
         try {
             Usuario usuarioLogado = usuarioRepository.findByLogin(user.getUsername());
             disciplina.setCreatedBy(usuarioLogado);
