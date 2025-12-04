@@ -128,5 +128,4 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 ```
 mvn spring-boot:run
 ```
-- Ou execute a classe **`ControleAcademicoApplication
-`**
+- Ou execute a classe **`ControleAcademicoApplication`**
