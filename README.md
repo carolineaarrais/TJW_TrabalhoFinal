@@ -25,7 +25,7 @@ Aplicação web completa para gerenciamento acadêmico, construída utilizando:
 - Cadastrar, editar, listar e excluir
 - Vincula **Aluno + Disciplina**
 - Situações: *CURSANDO, APROVADO, REPROVADO, TRANCADO*
-- Impede matrícula duplicada *CURSANDO* para o mesmo aluno na mesma disciplina
+- Impede matrícula duplicada *CURSANDO*, *TRANCADO* e *APROVADO* para o mesmo aluno na mesma disciplina
 
 ### 🔐 **Autenticação & Autorização**
 - Login em `/login`
